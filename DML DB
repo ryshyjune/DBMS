@@ -1,0 +1,297 @@
+mysql> use organization;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++------------------------+
+| Tables_in_organization |
++------------------------+
+| department             |
+| employee               |
+| orders                 |
+| persons                |
++------------------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D01','sales');
+Query OK, 1 row affected (0.03 sec)
+mysql> insert into department(dept_no,dept_name)values('D02', 'Marketing');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D03', 'engineering');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D04', 'Finance');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D05', 'HR');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D06', 'Legal');
+Query OK, 1 row affected (0.03 sec)
+mysql> insert into department(dept_no,dept_name)values('D07', 'Admin');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D08', 'Cust_Ser');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D09', 'Research');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department(dept_no,dept_name)values('D10', 'Public_rel');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from department;
++---------+-------------+
+| dept_no | dept_name   |
++---------+-------------+
+| D01     | sales       |
+| D02     | Marketing   |
+| D03     | engineering |
+| D04     | Finance     |
+| D05     | HR          |
+| D06     | Legal       |
+| D07     | Admin       |
+| D08     | Cust_Ser    |
+| D09     | Research    |
+| D10     | Public_rel  |
++---------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into employee(emp_id, emp_name, dob, address, mobile_no, dept_no, salary, designation)values(1, 'John Doe', '1990-01-01', 'Address 1', 1234567890, 'D01', 50000, 'Manager');
+Query OK, 1 row affected (0.04 sec)
+mysql> alter table employee modify mobile_no varchar(40);
+Query OK, 1 row affected (0.08 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> insert into employee(emp_id, emp_name, dob, address, mobile_no, dept_no,
+salary, designation)values(2, 'Jane Smith', '1985-02-02', 'Address 2', 2345678901, 'D02', 40000, 'Developer'),(3, 'Mike Johnson', '1991-03-03', 'Address 3', 3456789012, 'D01', 45000, 'Designer');
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+mysql> insert into employee(emp_id, emp_name, dob, address, mobile_no, dept_no,
+salary, designation)values(4, 'Emma Watson', '1995-04-04', 'Address 4', 4567890123, 'D02', 35000, 'Tester'),(5, 'Tom Holland', '1988-05-05', 'Address 5', 5678901234, 'D03', 60000, 'Manager'),(6, 'Sophia Loren', '1980-06-06', 'Address 6', 6789012345, 'D03', 50000, 'Developer'),(7, 'Robert Downey Jr.', '1975-07-07', 'Address 7', 7890123456, 'D04', 55000, 'Designer'),(8, 'Scarlett Johansson', '1984-08-08', 'Address 8', 8901234567, 'D04', 45000, 'Tester'),(9, 'Chris Evans', '1981-09-09', 'Address 9', 9012345678, 'D05', 70000, 'Manager'),(10, 'Natalie Portman', '1987-10-10', 'Address 10', 0123456789, 'D05', 60000, 'Developer');
+Query OK, 7 rows affected (0.00 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+| emp_id | emp_name           | dob        | address    | mobile_no  | dept_no | salary | designation |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+|      1 | John Doe           | 1990-01-01 | Address 1  | 1234567890 | D01     |  50000 | Manager     |
+|      2 | Jane Smith         | 1985-02-02 | Address 2  | 2345678901 | D02     |  40000 | Developer   |
+|      3 | Mike Johnson       | 1991-03-03 | Address 3  | 3456789012 | D01     |  45000 | Designer    |
+|      4 | Emma Watson        | 1995-04-04 | Address 4  | 4567890123 | D02     |  35000 | Tester      |
+|      5 | Tom Holland        | 1988-05-05 | Address 5  | 5678901234 | D03     |  60000 | Manager     |
+|      6 | Sophia Loren       | 1980-06-06 | Address 6  | 6789012345 | D03     |  50000 | Developer   |
+|      7 | Robert Downey Jr.  | 1975-07-07 | Address 7  | 7890123456 | D04     |  55000 | Designer    |
+|      8 | Scarlett Johansson | 1984-08-08 | Address 8  | 8901234567 | D04     |  45000 | Tester      |
+|      9 | Chris Evans        | 1981-09-09 | Address 9  | 9012345678 | D05     |  70000 | Manager     |
+|     10 | Natalie Portman    | 1987-10-10 | Address 10 | 123456789  | D05     |  60000 | Developer   |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+10 rows in set (0.00 sec)
+mysql> select emp_id,emp_name from employee where dept_no='D02';
++--------+-------------+
+| emp_id | emp_name    |
++--------+-------------+
+|      2 | Jane Smith  |
+|      4 | Emma Watson |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select emp_id,emp_name,designation,dept_no,salary from employee order by salary desc;
++--------+--------------------+-------------+---------+--------+
+| emp_id | emp_name           | designation | dept_no | salary |
++--------+--------------------+-------------+---------+--------+
+|      9 | Chris Evans        | Manager     | D05     |  70000 |
+|      5 | Tom Holland        | Manager     | D03     |  60000 |
+|     10 | Natalie Portman    | Developer   | D05     |  60000 |
+|      7 | Robert Downey Jr.  | Designer    | D04     |  55000 |
+|      1 | John Doe           | Manager     | D01     |  50000 |
+|      6 | Sophia Loren       | Developer   | D03     |  50000 |
+|      3 | Mike Johnson       | Designer    | D01     |  45000 |
+|      8 | Scarlett Johansson | Tester      | D04     |  45000 |
+|      2 | Jane Smith         | Developer   | D02     |  40000 |
+|      4 | Emma Watson        | Tester      | D02     |  35000 |
++--------+--------------------+-------------+---------+--------+
+10 rows in set (0.00 sec)
+mysql> select emp_id,emp_name from employee where salary between 20000 and 50000;
++--------+--------------------+
+| emp_id | emp_name           |
++--------+--------------------+
+|      1 | John Doe           |
+|      2 | Jane Smith         |
+|      3 | Mike Johnson       |
+|      4 | Emma Watson        |
+|      6 | Sophia Loren       |
+|      8 | Scarlett Johansson |
++--------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> select  distinct designation from employee;
++-------------+
+| designation |
++-------------+
+| Manager     |
+| Developer   |
+| Designer    |
+| Tester      |
++-------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee set salary=45000 where designation='Manager';
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from employee;
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+| emp_id | emp_name           | dob        | address    | mobile_no  | dept_no | salary | designation |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+|      1 | John Doe           | 1990-01-01 | Address 1  | 1234567890 | D01     |  45000 | Manager     |
+|      2 | Jane Smith         | 1985-02-02 | Address 2  | 2345678901 | D02     |  40000 | Developer   |
+|      3 | Mike Johnson       | 1991-03-03 | Address 3  | 3456789012 | D01     |  45000 | Designer    |
+|      4 | Emma Watson        | 1995-04-04 | Address 4  | 4567890123 | D02     |  35000 | Tester      |
+|      5 | Tom Holland        | 1988-05-05 | Address 5  | 5678901234 | D03     |  45000 | Manager     |
+|      6 | Sophia Loren       | 1980-06-06 | Address 6  | 6789012345 | D03     |  50000 | Developer   |
+|      7 | Robert Downey Jr.  | 1975-07-07 | Address 7  | 7890123456 | D04     |  55000 | Designer    |
+|      8 | Scarlett Johansson | 1984-08-08 | Address 8  | 8901234567 | D04     |  45000 | Tester      |
+|      9 | Chris Evans        | 1981-09-09 | Address 9  | 9012345678 | D05     |  45000 | Manager     |
+|     10 | Natalie Portman    | 1987-10-10 | Address 10 | 123456789  | D05     |  60000 | Developer   |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> update employee set mobile_no='0123456789' where emp_name='John Doe';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+| emp_id | emp_name           | dob        | address    | mobile_no  | dept_no | salary | designation |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+|      1 | John Doe           | 1990-01-01 | Address 1  | 0123456789 | D01     |  45000 | Manager     |
+|      2 | Jane Smith         | 1985-02-02 | Address 2  | 2345678901 | D02     |  40000 | Developer   |
+|      3 | Mike Johnson       | 1991-03-03 | Address 3  | 3456789012 | D01     |  45000 | Designer    |
+|      4 | Emma Watson        | 1995-04-04 | Address 4  | 4567890123 | D02     |  35000 | Tester      |
+|      5 | Tom Holland        | 1988-05-05 | Address 5  | 5678901234 | D03     |  45000 | Manager     |
+|      6 | Sophia Loren       | 1980-06-06 | Address 6  | 6789012345 | D03     |  50000 | Developer   |
+|      7 | Robert Downey Jr.  | 1975-07-07 | Address 7  | 7890123456 | D04     |  55000 | Designer    |
+|      8 | Scarlett Johansson | 1984-08-08 | Address 8  | 8901234567 | D04     |  45000 | Tester      |
+|      9 | Chris Evans        | 1981-09-09 | Address 9  | 9012345678 | D05     |  45000 | Manager     |
+|     10 | Natalie Portman    | 1987-10-10 | Address 10 | 123456789  | D05     |  60000 | Developer   |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+10 rows in set (0.00 sec)
+mysql> delete from employee where salary=50000;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from employee;
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+| emp_id | emp_name           | dob        | address    | mobile_no  | dept_no | salary | designation |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+|      1 | John Doe           | 1990-01-01 | Address 1  | 0123456789 | D01     |  45000 | Manager     |
+|      2 | Jane Smith         | 1985-02-02 | Address 2  | 2345678901 | D02     |  40000 | Developer   |
+|      3 | Mike Johnson       | 1991-03-03 | Address 3  | 3456789012 | D01     |  45000 | Designer    |
+|      4 | Emma Watson        | 1995-04-04 | Address 4  | 4567890123 | D02     |  35000 | Tester      |
+|      5 | Tom Holland        | 1988-05-05 | Address 5  | 5678901234 | D03     |  45000 | Manager     |
+|      7 | Robert Downey Jr.  | 1975-07-07 | Address 7  | 7890123456 | D04     |  55000 | Designer    |
+|      8 | Scarlett Johansson | 1984-08-08 | Address 8  | 8901234567 | D04     |  45000 | Tester      |
+|      9 | Chris Evans        | 1981-09-09 | Address 9  | 9012345678 | D05     |  45000 | Manager     |
+|     10 | Natalie Portman    | 1987-10-10 | Address 10 | 123456789  | D05     |  60000 | Developer   |
++--------+--------------------+------------+------------+------------+---------+--------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> select emp_name,mobile_no from employee where emp_name like 'J%';
++------------+------------+
+| emp_name   | mobile_no  |
++------------+------------+
+| John Doe   | 0123456789 |
+| Jane Smith | 2345678901 |
++------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where emp_id in(1,2,7);
++--------+-------------------+------------+-----------+------------+---------+--------+-------------+
+| emp_id | emp_name          | dob        | address   | mobile_no  | dept_no | salary | designation |
++--------+-------------------+------------+-----------+------------+---------+--------+-------------+
+|      1 | John Doe          | 1990-01-01 | Address 1 | 0123456789 | D01     |  45000 | Manager     |
+|      2 | Jane Smith        | 1985-02-02 | Address 2 | 2345678901 | D02     |  40000 | Developer   |
+|      7 | Robert Downey Jr. | 1975-07-07 | Address 7 | 7890123456 | D04     |  55000 | Designer    |
++--------+-------------------+------------+-----------+------------+---------+--------+-------------+
+3 rows in set (0.01 sec)
+mysql> select emp_id,emp_name from employee where salary between 40000 and 70000;
++--------+--------------------+
+| emp_id | emp_name           |
++--------+--------------------+
+|      1 | John Doe           |
+|      2 | Jane Smith         |
+|      3 | Mike Johnson       |
+|      5 | Tom Holland        |
+|      7 | Robert Downey Jr.  |
+|      8 | Scarlett Johansson |
+|      9 | Chris Evans        |
+|     10 | Natalie Portman    |
++--------+--------------------+
+8 rows in set (0.00 sec)
+
+ysql> select * from employee where designation in('manager','tester');
++--------+--------------------+------------+-----------+------------+---------+--------+-------------+
+| emp_id | emp_name           | dob        | address   | mobile_no  | dept_no | salary | designation |
++--------+--------------------+------------+-----------+------------+---------+--------+-------------+
+|      1 | John Doe           | 1990-01-01 | Address 1 | 0123456789 | D01     |  45000 | Manager     |
+|      4 | Emma Watson        | 1995-04-04 | Address 4 | 4567890123 | D02     |  35000 | Tester      |
+|      5 | Tom Holland        | 1988-05-05 | Address 5 | 5678901234 | D03     |  45000 | Manager     |
+|      8 | Scarlett Johansson | 1984-08-08 | Address 8 | 8901234567 | D04     |  45000 | Tester      |
+|      9 | Chris Evans        | 1981-09-09 | Address 9 | 9012345678 | D05     |  45000 | Manager     |
++--------+--------------------+------------+-----------+------------+---------+--------+-------------+
+5 rows in set (0.03 sec)
+mysql> select dept_no,count(*)as num_emp from employee group by dept_no;
++---------+---------+
+| dept_no | num_emp |
++---------+---------+
+| D01     |       2 |
+| D02     |       2 |
+| D03     |       1 |
+| D04     |       2 |
+| D05     |       2 |
++---------+---------+
+5 rows in set (0.03 sec)
+
+mysql> select dept_no,avg(salary)as avr_sal from employee group by dept_no;
++---------+------------+
+| dept_no | avr_sal    |
++---------+------------+
+| D01     | 45000.0000 |
+| D02     | 37500.0000 |
+| D03     | 45000.0000 |
+| D04     | 50000.0000 |
+| D05     | 52500.0000 |
++---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select dept_no,sum(salary)as tot_sal from employee group by dept_no;
++---------+---------+
+| dept_no | tot_sal |
++---------+---------+
+| D01     |   90000 |
+| D02     |   75000 |
+| D03     |   45000 |
+| D04     |  100000 |
+| D05     |  105000 |
++---------+---------+
+5 rows in set (0.00 sec)
+mysql> select avg(salary)as avg_sal from employee where dept_no!="D05";
++------------+
+| avg_sal    |
++------------+
+| 44285.7143 |
++------------+
+1 row in set (0.00 sec)
+mysql> select dept_no,avg(salary) from employee where dept_no!='D01'group by dept_no  having avg(salary)>20000 order by avg(salary) ;
++---------+-------------+
+| dept_no | avg(salary) |
++---------+-------------+
+| D02     |  37500.0000 |
+| D03     |  45000.0000 |
+| D04     |  50000.0000 |
+| D05     |  52500.0000 |
++---------+-------------+
+4 rows in set (0.00 sec)
