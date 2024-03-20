@@ -1,0 +1,110 @@
+mysql> create table course(course_id int,course_name varchar(255),course_duration int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| course            |
+| students          |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc students;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| roll_no   | int         | YES  |     | NULL    |       |
+| name      | varchar(25) | YES  |     | NULL    |       |
+| dob       | date        | YES  |     | NULL    |       |
+| address   | text        | YES  |     | NULL    |       |
+| phone_no  | varchar(10) | YES  |     | NULL    |       |
+| blood_grp | varchar(5)  | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> desc course;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| course_id       | int          | YES  |     | NULL    |       |
+| course_name     | varchar(255) | YES  |     | NULL    |       |
+| course_duration | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table students drop column blood_grp;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| roll_no  | int         | YES  |     | NULL    |       |
+| name     | varchar(25) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| address  | text        | YES  |     | NULL    |       |
+| phone_no | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table add adar_no int(12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add adar_no int(12)' at line 1
+mysql> alter table students add adar_no int(12);
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc students;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| roll_no  | int         | YES  |     | NULL    |       |
+| name     | varchar(25) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| address  | text        | YES  |     | NULL    |       |
+| phone_no | varchar(10) | YES  |     | NULL    |       |
+| adar_no  | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table students modify phone_no int;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| roll_no  | int         | YES  |     | NULL    |       |
+| name     | varchar(25) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| address  | text        | YES  |     | NULL    |       |
+| phone_no | int         | YES  |     | NULL    |       |
+| adar_no  | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> 
+
+mysql> drop table student;
+ERROR 1051 (42S02): Unknown table 'college.student'
+mysql> drop table students;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop table course;
+Query OK, 0 rows affected (0.04 sec)
+mysql> drop database college;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> use college;
+ERROR 1049 (42000): Unknown database 'college'
+mysql> 
+
+
+mysql> desc students;
+ERROR 1146 (42S02): Table 'college.students' doesn't exist
+mysql> desc course;
+ERROR 1146 (42S02): Table 'college.course' doesn't exist
+mysql> 
+
+
